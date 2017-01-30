@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Client.h"
 
 @interface AddClient : NSWindowController <NSComboBoxDataSource>
+
+- (instancetype _Nonnull)initWithClient:(Client * _Nonnull)cl;
 
 @end

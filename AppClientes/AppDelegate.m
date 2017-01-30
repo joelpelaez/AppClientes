@@ -15,7 +15,7 @@
 
 @interface AppDelegate () {
     int numrows;
-    NSMutableArray<NSMutableDictionary *> *data;
+    NSArray<NSDictionary *> *data;
     NSMutableArray<NSMutableDictionary *> *catData;
     Client *clients;
     AddClient *addClient;
@@ -94,14 +94,12 @@
 }
 
 - (IBAction)searchClient:(id)sender {
-    const char *p = self.textField.stringValue.UTF8String;
-    [self searchQuery:p];
+    [self searchQuery:self.textField.stringValue];
     [self.tableView reloadData];
 }
 
 - (IBAction)searchCategory:(id)sender {
-    const char *p = self.textField.stringValue.UTF8String;
-    [self categorySearchQuery:p];
+    [self categorySearchQuery:self.catTextField.stringValue.UTF8String];
     [self.catTableView reloadData];
 }
 
@@ -151,7 +149,7 @@
 
 - (IBAction)addClient:(id)sender {
     if (!addClient)
-        addClient = [[AddClient alloc] init];
+        addClient = [[AddClient alloc] initWithClient:clients];
     
     // If the window is a active sheet, make it front.
     if (addClient.window.isVisible) {
@@ -254,67 +252,12 @@
     data = [clients fetchAllClients];
 }
 
-- (void)searchQuery:(const char *)search {
-    const char * select =   "SELECT cl.id, cl.nombre, cl.apellidos, cl.telefono, "
-                            "cl.correo_electronico, cl.categoria_id, ca.nombre FROM clientes cl "
-                            "INNER JOIN categorias ca ON cl.categoria_id = ca.id "
-                            "WHERE apellidos LIKE ?";
-    data = [NSMutableArray<NSMutableDictionary *> array];
-    sqlite3_stmt *stmt;
-    int result = sqlite3_prepare_v2(conn, select, -1, &stmt, NULL);
-
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        return;
-    }
-    
-    result = sqlite3_bind_text(stmt, 1, search, -1, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        return;
-    }
-    
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:6];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 0)] forKey:@"cliente_id"];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)] forKey:@"cliente_nombre"];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 2)] forKey:@"cliente_apellidos"];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 3)] forKey:@"cliente_telefono"];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 4)] forKey:@"cliente_correo"];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 5)] forKey:@"cliente_categoria_id"];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 6)] forKey:@"cliente_categoria"];
-        [data addObject:dict];
-    }
-    
-    sqlite3_finalize(stmt);
+- (void)searchQuery:(NSString *)search {
+    data = [clients searchClients:search];
 }
 
 - (void)deleteRow:(int)idt {
-    const char * select =   "DELETE FROM clientes WHERE id = ?";
-    sqlite3_stmt *stmt;
-    int result = sqlite3_prepare_v2(conn, select, -1, &stmt, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        return;
-    }
-    
-    result = sqlite3_bind_int(stmt, 1, idt);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error deleting the data: %s", sqlite3_errmsg(conn));
-        sqlite3_finalize(stmt);
-        return;
-    }
-    
-    if (sqlite3_step(stmt) != SQLITE_DONE) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        sqlite3_finalize(stmt);
-        return;
-    }
-    
-    sqlite3_finalize(stmt);
+    [clients removeClientWithID:idt];
 }
 
 

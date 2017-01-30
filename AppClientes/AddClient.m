@@ -9,10 +9,12 @@
 #import "AddClient.h"
 #import "AppDelegate.h"
 #import "NSString+EmailValidation.h"
+#import "Client.h"
 
 @interface AddClient () {
     sqlite3 *conn;
     NSMutableArray<NSMutableDictionary *> * data;
+    Client *clients;
 }
 
 @property (weak) IBOutlet NSTextField *nombre;
@@ -25,9 +27,10 @@
 
 @implementation AddClient
 
-- (instancetype)init {
+- (instancetype _Nonnull)initWithClient:(Client  * _Nonnull)cl {
     self = [super init];
     [self loadCategories];
+    clients = cl;
     return self;
 }
 
@@ -64,12 +67,8 @@
 }
 
 - (IBAction)addNewClient:(id)sender {
-    const char *sql =   "INSERT INTO clientes (nombre, apellidos, telefono, "
-                        "correo_electronico, categoria_id) VALUES (?, ?, ?, ?, ?)";
     
-    AppDelegate *app = (AppDelegate *)[NSApplication sharedApplication].delegate;
     NSInteger pos = self.categoria.indexOfSelectedItem;
-    conn = [app sqlite3_conn];
     
     // First check valid data
     if (![self.correo.stringValue isValidEmail]) {
@@ -83,58 +82,31 @@
     }
     
     // Check if email not exists in database
+    NSDictionary *exists = [clients searchWithEmail:self.correo.stringValue];
     
-    sqlite3_stmt *stmt;
-    int result = sqlite3_prepare_v2(conn, sql, -1, &stmt, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end_without_stmt;
+    if (exists) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Correo en uso"];
+        [alert setInformativeText:@"Debe ingresar un correo diferente"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert runModal];
+        return;
     }
     
-    result = sqlite3_bind_text(stmt, 1, self.nombre.stringValue.UTF8String, -1, NULL);
     
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
+    // Realize insert
+    BOOL result = [clients insertClientWithFirstname:self.nombre.stringValue lastname:self.apellidos.stringValue phone:self.telefono.stringValue email:self.correo.stringValue category:[data[pos][@"id"] intValue]];
+    
+    if (!result) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"No se pudo insertar al cliente"];
+        [alert setInformativeText:@"Contacte con su administrador"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSAlertStyleCritical];
+        [alert runModal];
     }
-    
-    result = sqlite3_bind_text(stmt, 2, self.apellidos.stringValue.UTF8String, -1, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-    result = sqlite3_bind_text(stmt, 3, self.telefono.stringValue.UTF8String, -1, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-    result = sqlite3_bind_text(stmt, 4, self.correo.stringValue.UTF8String, -1, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-    result = sqlite3_bind_int(stmt, 5, [data[pos][@"id"] intValue]);
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-    if (sqlite3_step(stmt) != SQLITE_DONE) {
-        NSLog(@"Error: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-end:
-    sqlite3_finalize(stmt);
-    
-end_without_stmt:
+
     [self.window.sheetParent endSheet:self.window];
 }
 

@@ -12,11 +12,14 @@
 @interface Client : NSObject
 
 + (instancetype)clientWithConnection:(sqlite3 *)conn;
+
 - (NSArray<NSDictionary *> *)fetchAllClients;
 - (NSArray<NSDictionary *> *)searchClients:(NSString *)lastname;
 - (NSDictionary *)fetchClient:(int)idt;
-- (BOOL)removeClient:(int)idt;
-- (BOOL)updateClient:(int)idt firstname:(NSString *)fname lastname:(NSString *)lname phone:(NSString *)phone email:(NSString *)email category:(int)catid;
+- (NSDictionary *)searchWithEmail:(NSString *)email;
+
+- (BOOL)removeClientWithID:(int)idt;
+- (BOOL)updateClientWithID:(int)idt firstname:(NSString *)fname lastname:(NSString *)lname phone:(NSString *)phone email:(NSString *)email category:(int)catid;
 - (BOOL)insertClientWithFirstname:(NSString *)fname lastname:(NSString *)lname phone:(NSString *)phone email:(NSString *)email category:(int)catid;
 
 @end
