@@ -1,0 +1,361 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5D3660A61E3EDB67001710A8 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D3660A51E3EDB67001710A8 /* Client.m */; };
+		5D462F121E36EFD3001F1B03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D462F111E36EFD3001F1B03 /* AppDelegate.m */; };
+		5D462F151E36EFD3001F1B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D462F141E36EFD3001F1B03 /* main.m */; };
+		5D462F171E36EFD3001F1B03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D462F161E36EFD3001F1B03 /* Assets.xcassets */; };
+		5D462F1A1E36EFD4001F1B03 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D462F181E36EFD4001F1B03 /* MainMenu.xib */; };
+		5D462F3F1E36F01D001F1B03 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D462F3E1E36F01D001F1B03 /* libsqlite3.tbd */; };
+		5D462F451E36F5A8001F1B03 /* NSFileManager+AppSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D462F441E36F5A8001F1B03 /* NSFileManager+AppSupport.m */; };
+		5D8B59811E390C65008A0E54 /* EditClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8B597F1E390C65008A0E54 /* EditClient.m */; };
+		5D8B59821E390C65008A0E54 /* EditClient.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8B59801E390C65008A0E54 /* EditClient.xib */; };
+		5DC180C71E37BE2D00CED50D /* AddClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC180C51E37BE2D00CED50D /* AddClient.m */; };
+		5DC180C81E37BE2D00CED50D /* AddClient.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC180C61E37BE2D00CED50D /* AddClient.xib */; };
+		5DC180CC1E37C74100CED50D /* AddCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC180CA1E37C74100CED50D /* AddCategory.m */; };
+		5DC180CD1E37C74100CED50D /* AddCategory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC180CB1E37C74100CED50D /* AddCategory.xib */; };
+		5DCF028B1E3E9E8400A82320 /* NSString+EmailValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DCF028A1E3E9E8400A82320 /* NSString+EmailValidation.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5D3660A41E3EDB67001710A8 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		5D3660A51E3EDB67001710A8 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
+		5D462F0D1E36EFD3001F1B03 /* AppClientes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppClientes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D462F101E36EFD3001F1B03 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5D462F111E36EFD3001F1B03 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5D462F141E36EFD3001F1B03 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5D462F161E36EFD3001F1B03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5D462F191E36EFD4001F1B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5D462F1B1E36EFD4001F1B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D462F3E1E36F01D001F1B03 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		5D462F431E36F5A8001F1B03 /* NSFileManager+AppSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+AppSupport.h"; sourceTree = "<group>"; };
+		5D462F441E36F5A8001F1B03 /* NSFileManager+AppSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+AppSupport.m"; sourceTree = "<group>"; };
+		5D8B597E1E390C65008A0E54 /* EditClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditClient.h; sourceTree = "<group>"; };
+		5D8B597F1E390C65008A0E54 /* EditClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditClient.m; sourceTree = "<group>"; };
+		5D8B59801E390C65008A0E54 /* EditClient.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditClient.xib; sourceTree = "<group>"; };
+		5DC180C41E37BE2D00CED50D /* AddClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddClient.h; sourceTree = "<group>"; };
+		5DC180C51E37BE2D00CED50D /* AddClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddClient.m; sourceTree = "<group>"; };
+		5DC180C61E37BE2D00CED50D /* AddClient.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddClient.xib; sourceTree = "<group>"; };
+		5DC180C91E37C74100CED50D /* AddCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCategory.h; sourceTree = "<group>"; };
+		5DC180CA1E37C74100CED50D /* AddCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCategory.m; sourceTree = "<group>"; };
+		5DC180CB1E37C74100CED50D /* AddCategory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCategory.xib; sourceTree = "<group>"; };
+		5DCF02891E3E9E8400A82320 /* NSString+EmailValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EmailValidation.h"; sourceTree = "<group>"; };
+		5DCF028A1E3E9E8400A82320 /* NSString+EmailValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EmailValidation.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5D462F0A1E36EFD3001F1B03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D462F3F1E36F01D001F1B03 /* libsqlite3.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5D462F041E36EFD3001F1B03 = {
+			isa = PBXGroup;
+			children = (
+				5D462F0F1E36EFD3001F1B03 /* AppClientes */,
+				5D462F0E1E36EFD3001F1B03 /* Products */,
+				5D462F3D1E36F01D001F1B03 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5D462F0E1E36EFD3001F1B03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D462F0D1E36EFD3001F1B03 /* AppClientes.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5D462F0F1E36EFD3001F1B03 /* AppClientes */ = {
+			isa = PBXGroup;
+			children = (
+				5D462F101E36EFD3001F1B03 /* AppDelegate.h */,
+				5D462F111E36EFD3001F1B03 /* AppDelegate.m */,
+				5D462F161E36EFD3001F1B03 /* Assets.xcassets */,
+				5D462F181E36EFD4001F1B03 /* MainMenu.xib */,
+				5D462F1B1E36EFD4001F1B03 /* Info.plist */,
+				5D462F131E36EFD3001F1B03 /* Supporting Files */,
+				5D462F431E36F5A8001F1B03 /* NSFileManager+AppSupport.h */,
+				5D462F441E36F5A8001F1B03 /* NSFileManager+AppSupport.m */,
+				5DC180C41E37BE2D00CED50D /* AddClient.h */,
+				5DC180C51E37BE2D00CED50D /* AddClient.m */,
+				5DC180C61E37BE2D00CED50D /* AddClient.xib */,
+				5DC180C91E37C74100CED50D /* AddCategory.h */,
+				5DC180CA1E37C74100CED50D /* AddCategory.m */,
+				5DC180CB1E37C74100CED50D /* AddCategory.xib */,
+				5D8B597E1E390C65008A0E54 /* EditClient.h */,
+				5D8B597F1E390C65008A0E54 /* EditClient.m */,
+				5D8B59801E390C65008A0E54 /* EditClient.xib */,
+				5DCF02891E3E9E8400A82320 /* NSString+EmailValidation.h */,
+				5DCF028A1E3E9E8400A82320 /* NSString+EmailValidation.m */,
+				5D3660A41E3EDB67001710A8 /* Client.h */,
+				5D3660A51E3EDB67001710A8 /* Client.m */,
+			);
+			name = AppClientes;
+			path = AppClientes;
+			sourceTree = "<group>";
+		};
+		5D462F131E36EFD3001F1B03 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5D462F141E36EFD3001F1B03 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5D462F3D1E36F01D001F1B03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D462F3E1E36F01D001F1B03 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5D462F0C1E36EFD3001F1B03 /* AppClientes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D462F341E36EFD4001F1B03 /* Build configuration list for PBXNativeTarget "AppClientes" */;
+			buildPhases = (
+				5D462F091E36EFD3001F1B03 /* Sources */,
+				5D462F0A1E36EFD3001F1B03 /* Frameworks */,
+				5D462F0B1E36EFD3001F1B03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppClientes;
+			productName = AppClientes;
+			productReference = 5D462F0D1E36EFD3001F1B03 /* AppClientes.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5D462F051E36EFD3001F1B03 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Joel Peláez Jorge";
+				TargetAttributes = {
+					5D462F0C1E36EFD3001F1B03 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 5D462F081E36EFD3001F1B03 /* Build configuration list for PBXProject "AppClientes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5D462F041E36EFD3001F1B03;
+			productRefGroup = 5D462F0E1E36EFD3001F1B03 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5D462F0C1E36EFD3001F1B03 /* AppClientes */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5D462F0B1E36EFD3001F1B03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DC180C81E37BE2D00CED50D /* AddClient.xib in Resources */,
+				5D462F171E36EFD3001F1B03 /* Assets.xcassets in Resources */,
+				5D462F1A1E36EFD4001F1B03 /* MainMenu.xib in Resources */,
+				5DC180CD1E37C74100CED50D /* AddCategory.xib in Resources */,
+				5D8B59821E390C65008A0E54 /* EditClient.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5D462F091E36EFD3001F1B03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D8B59811E390C65008A0E54 /* EditClient.m in Sources */,
+				5D462F451E36F5A8001F1B03 /* NSFileManager+AppSupport.m in Sources */,
+				5D3660A61E3EDB67001710A8 /* Client.m in Sources */,
+				5DCF028B1E3E9E8400A82320 /* NSString+EmailValidation.m in Sources */,
+				5DC180CC1E37C74100CED50D /* AddCategory.m in Sources */,
+				5D462F151E36EFD3001F1B03 /* main.m in Sources */,
+				5DC180C71E37BE2D00CED50D /* AddClient.m in Sources */,
+				5D462F121E36EFD3001F1B03 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5D462F181E36EFD4001F1B03 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5D462F191E36EFD4001F1B03 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5D462F321E36EFD4001F1B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		5D462F331E36EFD4001F1B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		5D462F351E36EFD4001F1B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = AppClientes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.joelpelaez.AppClientes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5D462F361E36EFD4001F1B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = AppClientes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.joelpelaez.AppClientes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5D462F081E36EFD3001F1B03 /* Build configuration list for PBXProject "AppClientes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D462F321E36EFD4001F1B03 /* Debug */,
+				5D462F331E36EFD4001F1B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D462F341E36EFD4001F1B03 /* Build configuration list for PBXNativeTarget "AppClientes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D462F351E36EFD4001F1B03 /* Debug */,
+				5D462F361E36EFD4001F1B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5D462F051E36EFD3001F1B03 /* Project object */;
+}
