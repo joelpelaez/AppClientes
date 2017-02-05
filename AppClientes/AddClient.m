@@ -27,7 +27,14 @@
 
 @implementation AddClient
 
-- (instancetype _Nonnull)initWithClient:(Client  * _Nonnull)cl {
+/**
+ Create a new window controller for add a new client using
+ a existent Client connection
+
+ @param cl Client object
+ @return A new instance of AddClien
+ */
+- (instancetype _Nonnull)initWithClient:(Client * _Nonnull)cl {
     self = [super init];
     [self loadCategories];
     clients = cl;
@@ -36,6 +43,13 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+}
+
+/**
+ Reload all data necessary for add new clients.
+ */
+- (void)reload {
+    [self loadCategories];
 }
 
 - (void)loadCategories {

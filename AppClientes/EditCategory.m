@@ -1,52 +1,53 @@
 //
-//  AddCategory.m
-//  SqliteTest
+//  EditCategory.m
+//  AppClientes
 //
-//  Created by Joel Peláez Jorge on 24/01/17.
+//  Created by Joel Peláez Jorge on 04/02/17.
 //  Copyright © 2017 Joel Peláez Jorge. All rights reserved.
 //
 
-#import "AddCategory.h"
-#include <sqlite3.h>
-#import "AppDelegate.h"
+#import "EditCategory.h"
 
-@interface AddCategory () {
+@interface EditCategory () {
     Category *category;
+    int cid;
 }
-
-@property (weak) IBOutlet NSTextField *nombre;
 
 @end
 
-@implementation AddCategory
+@implementation EditCategory
 
 - (void)windowDidLoad {
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    
 }
 
 /**
  Initialize a new window controller for add a category using
  a existent Category class.
-
+ 
  @param cat Category object.
  @return A new AddCategory instance.
  */
-- (instancetype)initWithCategory:(Category *)cat {
+- (instancetype)initWithCategory:(Category *)cat andID:(int)idt {
     self = [super init];
     self->category = cat;
+    self->cid = idt;
     return self;
+}
+
+- (void)changeID:(int)idt {
+    self->cid = idt;
 }
 
 - (IBAction)cancel:(id)sender {
     [self.window.sheetParent endSheet:self.window];
 }
 
-- (IBAction)addCategory:(id)sender {
+- (IBAction)editCategory:(id)sender {
     
-    BOOL result = [category insertCategoryWithName:self.nombre.stringValue];
+    BOOL result = [category updateCategoryWithID:cid name:self.nombre.stringValue];
     
     if (!result) {
         NSAlert *alert = [[NSAlert alloc] init];

@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Client.h"
 
 @interface EditClient : NSWindowController <NSComboBoxDataSource>
 
@@ -16,7 +17,9 @@
 @property (weak) IBOutlet NSTextField *correo;
 @property (weak) IBOutlet NSComboBox *categoria;
 
-- (instancetype)initWithID:(int)idClient;
+- (instancetype)initWithID:(int)idClient andClientClass:(Client *)cl;
 - (void)setCategoriaID:(int)idCategoria;
+- (void)changeID:(int)idt;
+- (void)reload;
 
 @end

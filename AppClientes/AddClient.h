@@ -12,5 +12,5 @@
 @interface AddClient : NSWindowController <NSComboBoxDataSource>
 
 - (instancetype _Nonnull)initWithClient:(Client * _Nonnull)cl;
-
+- (void)reload;
 @end

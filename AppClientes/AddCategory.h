@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Category.h"
 
 @interface AddCategory : NSWindowController
+
+- (instancetype)initWithCategory:(Category *)cat;
 
 @end

@@ -8,25 +8,62 @@
 
 #import "EditClient.h"
 #import "AppDelegate.h"
+#import "Client.h"
+#import "NSString+EmailValidation.h"
+
 #include <sqlite3.h>
 
 @interface EditClient () {
     sqlite3 *conn;
     NSMutableArray<NSMutableDictionary *> * data;
     int idt;
+    Client *clients;
 }
 
 @end
 
 @implementation EditClient
 
-- (instancetype)initWithID:(int)idClient {
+/**
+ Create a new window controller for editing a client using
+ a existent Client class.
+
+ @param idClient A existent client identifier.
+ @param cl Client object.
+ @return A new EditClient instance.
+ */
+- (instancetype)initWithID:(int)idClient andClientClass:(Client *)cl {
     self = [super init];
     [self loadCategories];
     self->idt = idClient;
+    self->clients = cl;
+    NSLog(@"%d", idt);
     return self;
 }
 
+/**
+ Change the current user to edit. Used when the controller
+ was created and it's reused.
+
+ @param newID A existent client identifer.
+ */
+- (void)changeID:(int)newID {
+    self->idt = newID;
+}
+
+/**
+ Reload the data necessary for edit a client.
+ */
+- (void)reload {
+    [self loadCategories];
+}
+
+/**
+ Change the category of a client. This works in programming level
+ for update the ComboBox.
+
+ @param idCategoria A existent category identifer.
+ */
 - (void)setCategoriaID:(int)idCategoria {
     for (int i = 0; i < data.count; i++) {
         if ([data[i][@"id"] intValue] == idCategoria) {
@@ -69,72 +106,47 @@
 }
 
 - (IBAction)addNewClient:(id)sender {
-    const char *sql =   "UPDATE clientes SET nombre = ?, apellidos = ?, telefono = ?, "
-    "correo_electronico = ?, categoria_id = ? WHERE id = ?";
     
-    AppDelegate *app = (AppDelegate *)[NSApplication sharedApplication].delegate;
-    NSInteger pos = self.categoria.indexOfSelectedItem;
-    conn = [app sqlite3_conn];
+    int pos = (int)self.categoria.indexOfSelectedItem;
     
-    sqlite3_stmt *stmt;
-    int result = sqlite3_prepare_v2(conn, sql, -1, &stmt, NULL);
+    int catid = [data[pos][@"id"] intValue];
     
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end_without_stmt;
+    // First check valid data
+    if (![self.correo.stringValue isValidEmail]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Correo inválido"];
+        [alert setInformativeText:@"Debe ingresar un correo con formato válido"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert runModal];
+        return;
     }
     
-    result = sqlite3_bind_text(stmt, 1, self.nombre.stringValue.UTF8String, -1, NULL);
+    // Check if email not exists in database
+    NSDictionary *exists = [clients searchWithEmail:self.correo.stringValue];
     
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
+    if (exists && [exists[@"cliente_id"] intValue] != idt) {
+        NSLog(@"%@ with id: %d", exists, idt);
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Correo en uso"];
+        [alert setInformativeText:@"Debe ingresar un correo diferente"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert runModal];
+        return;
     }
     
-    result = sqlite3_bind_text(stmt, 2, self.apellidos.stringValue.UTF8String, -1, NULL);
+    BOOL result = [clients updateClientWithID:idt firstname:self.nombre.stringValue lastname:self.apellidos.stringValue phone:self.telefono.stringValue email:self.correo.stringValue category:catid];
     
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
+    if (!result) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"No se pudo insertar al cliente"];
+        [alert setInformativeText:@"Contacte con su administrador"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSAlertStyleCritical];
+        [alert runModal];
     }
     
-    result = sqlite3_bind_text(stmt, 3, self.telefono.stringValue.UTF8String, -1, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-    result = sqlite3_bind_text(stmt, 4, self.correo.stringValue.UTF8String, -1, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-    result = sqlite3_bind_int(stmt, 5, [data[pos][@"id"] intValue]);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-    result = sqlite3_bind_int(stmt, 6, idt);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-    if (sqlite3_step(stmt) != SQLITE_DONE) {
-        NSLog(@"Error: %s", sqlite3_errmsg(conn));
-        goto end;
-    }
-    
-end:
-    sqlite3_finalize(stmt);
-    
-end_without_stmt:
     [self.window.sheetParent endSheet:self.window];
 }
 

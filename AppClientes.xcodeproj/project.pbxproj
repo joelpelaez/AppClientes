@@ -21,6 +21,9 @@
 		5DC180CC1E37C74100CED50D /* AddCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC180CA1E37C74100CED50D /* AddCategory.m */; };
 		5DC180CD1E37C74100CED50D /* AddCategory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC180CB1E37C74100CED50D /* AddCategory.xib */; };
 		5DCF028B1E3E9E8400A82320 /* NSString+EmailValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DCF028A1E3E9E8400A82320 /* NSString+EmailValidation.m */; };
+		5DD4E4921E469B9500B17986 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4E4911E469B9500B17986 /* Category.m */; };
+		5DD4E4961E46BB3200B17986 /* EditCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DD4E4941E46BB3200B17986 /* EditCategory.m */; };
+		5DD4E4971E46BB3200B17986 /* EditCategory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD4E4951E46BB3200B17986 /* EditCategory.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,11 @@
 		5DC180CB1E37C74100CED50D /* AddCategory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCategory.xib; sourceTree = "<group>"; };
 		5DCF02891E3E9E8400A82320 /* NSString+EmailValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EmailValidation.h"; sourceTree = "<group>"; };
 		5DCF028A1E3E9E8400A82320 /* NSString+EmailValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EmailValidation.m"; sourceTree = "<group>"; };
+		5DD4E4901E469B9500B17986 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		5DD4E4911E469B9500B17986 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		5DD4E4931E46BB3200B17986 /* EditCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCategory.h; sourceTree = "<group>"; };
+		5DD4E4941E46BB3200B17986 /* EditCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCategory.m; sourceTree = "<group>"; };
+		5DD4E4951E46BB3200B17986 /* EditCategory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCategory.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +103,9 @@
 				5DC180C91E37C74100CED50D /* AddCategory.h */,
 				5DC180CA1E37C74100CED50D /* AddCategory.m */,
 				5DC180CB1E37C74100CED50D /* AddCategory.xib */,
+				5DD4E4931E46BB3200B17986 /* EditCategory.h */,
+				5DD4E4941E46BB3200B17986 /* EditCategory.m */,
+				5DD4E4951E46BB3200B17986 /* EditCategory.xib */,
 				5D8B597E1E390C65008A0E54 /* EditClient.h */,
 				5D8B597F1E390C65008A0E54 /* EditClient.m */,
 				5D8B59801E390C65008A0E54 /* EditClient.xib */,
@@ -102,8 +113,9 @@
 				5DCF028A1E3E9E8400A82320 /* NSString+EmailValidation.m */,
 				5D3660A41E3EDB67001710A8 /* Client.h */,
 				5D3660A51E3EDB67001710A8 /* Client.m */,
+				5DD4E4901E469B9500B17986 /* Category.h */,
+				5DD4E4911E469B9500B17986 /* Category.m */,
 			);
-			name = AppClientes;
 			path = AppClientes;
 			sourceTree = "<group>";
 		};
@@ -186,6 +198,7 @@
 				5D462F1A1E36EFD4001F1B03 /* MainMenu.xib in Resources */,
 				5DC180CD1E37C74100CED50D /* AddCategory.xib in Resources */,
 				5D8B59821E390C65008A0E54 /* EditClient.xib in Resources */,
+				5DD4E4971E46BB3200B17986 /* EditCategory.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,9 +210,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D8B59811E390C65008A0E54 /* EditClient.m in Sources */,
+				5DD4E4921E469B9500B17986 /* Category.m in Sources */,
 				5D462F451E36F5A8001F1B03 /* NSFileManager+AppSupport.m in Sources */,
 				5D3660A61E3EDB67001710A8 /* Client.m in Sources */,
 				5DCF028B1E3E9E8400A82320 /* NSString+EmailValidation.m in Sources */,
+				5DD4E4961E46BB3200B17986 /* EditCategory.m in Sources */,
 				5DC180CC1E37C74100CED50D /* AddCategory.m in Sources */,
 				5D462F151E36EFD3001F1B03 /* main.m in Sources */,
 				5DC180C71E37BE2D00CED50D /* AddClient.m in Sources */,

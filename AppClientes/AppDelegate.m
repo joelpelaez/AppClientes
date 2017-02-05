@@ -9,18 +9,22 @@
 #import "AppDelegate.h"
 #import "NSFileManager+AppSupport.h"
 #import "Client.h"
+#import "Category.h"
 #import "AddClient.h"
 #import "AddCategory.h"
 #import "EditClient.h"
+#import "EditCategory.h"
 
 @interface AppDelegate () {
     int numrows;
     NSArray<NSDictionary *> *data;
-    NSMutableArray<NSMutableDictionary *> *catData;
+    NSArray<NSDictionary *> *catData;
     Client *clients;
+    Category *categories;
     AddClient *addClient;
     EditClient *editClient;
     AddCategory *addCategory;
+    EditCategory *editCategory;
 }
 
 @property (weak) IBOutlet NSWindow *window;
@@ -45,6 +49,7 @@
     }
     
     clients = [Client clientWithConnection:conn];
+    categories = [Category categoryWithConnection:conn];
     [self createDatabase];
     [self mainQuery];
     [self.tableView setDataSource:self];
@@ -99,7 +104,7 @@
 }
 
 - (IBAction)searchCategory:(id)sender {
-    [self categorySearchQuery:self.catTextField.stringValue.UTF8String];
+    [self categorySearchQuery:self.catTextField.stringValue];
     [self.catTableView reloadData];
 }
 
@@ -141,7 +146,7 @@
     [alert setInformativeText:@"Los cambios no pueden deshacerse"];
     NSModalResponse response = [alert runModal];
     if (response == NSAlertFirstButtonReturn) {
-        [self deleteRow:[catData[row][@"ID"] intValue]];
+        [self categoryDeleteRow:[catData[row][@"id"] intValue]];
         [self categoryMainQuery];
         [self.catTableView reloadData];
     }
@@ -150,7 +155,8 @@
 - (IBAction)addClient:(id)sender {
     if (!addClient)
         addClient = [[AddClient alloc] initWithClient:clients];
-    
+    else
+        [addClient reload];
     // If the window is a active sheet, make it front.
     if (addClient.window.isVisible) {
         [addClient.window makeKeyAndOrderFront:self];
@@ -172,7 +178,7 @@
 
 - (IBAction)addCategory:(id)sender {
     if (!addCategory)
-        addCategory = [[AddCategory alloc] init];
+        addCategory = [[AddCategory alloc] initWithCategory:categories];
     
     if (addCategory.window.isVisible) {
         [addCategory.window makeKeyAndOrderFront:self];
@@ -196,9 +202,13 @@
     NSInteger row = self.tableView.selectedRow;
     if (row == -1)
         return;
-    int idt = [data[row][@"ID"] intValue];
+    int idt = [data[row][@"cliente_id"] intValue];
     if (!editClient)
-        editClient = [[EditClient alloc] initWithID:idt];
+        editClient = [[EditClient alloc] initWithID:idt andClientClass:clients];
+    else {
+        [editClient changeID:idt];
+        [editClient reload];
+    }
     if ([[NSBundle mainBundle] loadNibNamed:@"EditClient" owner:editClient topLevelObjects:nil] != YES) {
         NSLog(@"Error loading nib");
     }
@@ -213,6 +223,29 @@
     editClient.telefono.stringValue = data[row][@"cliente_telefono"];
     editClient.correo.stringValue = data[row][@"cliente_correo"];
     [editClient setCategoriaID:[data[row][@"cliente_categoria_id"] intValue]];
+}
+
+- (IBAction)editCategory:(id)sender {
+    NSInteger row = self.catTableView.selectedRow;
+    if (row == -1)
+        return;
+    int idt = [catData[row][@"id"] intValue];
+    
+    if (!editCategory)
+        editCategory = [[EditCategory alloc] initWithCategory:categories andID:idt];
+    else
+        [editCategory changeID:idt];
+    
+    if ([[NSBundle mainBundle] loadNibNamed:@"EditCategory" owner:editCategory topLevelObjects:nil] != YES) {
+        NSLog(@"Error loading nib");
+    }
+    [self.catWindow beginSheet:editCategory.window completionHandler:^(NSModalResponse returnCode) {
+        if (self.catWindow.isVisible) {
+            [self categoryMainQuery];
+            [self.catTableView reloadData];
+        }
+    }];
+    editCategory.nombre.stringValue = catData[row][@"nombre"];
 }
 
 #pragma mark Manejo de la base de datos
@@ -264,79 +297,15 @@
 #pragma mark Manejo de categorias
 
 - (void)categoryMainQuery {
-    const char * select =   "SELECT c.id, c.nombre FROM categorias c";
-    catData = [NSMutableArray<NSMutableDictionary *> array];
-    sqlite3_stmt *stmt;
-    int result = sqlite3_prepare_v2(conn, select, -1, &stmt, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        return;
-    }
-    
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:6];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 0)] forKey:@"categoria_id"];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)] forKey:@"categoria_nombre"];
-        [catData addObject:dict];
-    }
-    
-    sqlite3_finalize(stmt);
+    catData = [categories fetchAllCategories];
 }
 
-- (void)categorySearchQuery:(const char *)search {
-    const char * select =   "SELECT c.id, c.nombre FROM categorias c WHERE c.nombre LIKE ?";
-    catData = [NSMutableArray<NSMutableDictionary *> array];
-    sqlite3_stmt *stmt;
-    int result = sqlite3_prepare_v2(conn, select, -1, &stmt, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        return;
-    }
-    
-    result = sqlite3_bind_text(stmt, 1, search, -1, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        return;
-    }
-    
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:6];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 0)] forKey:@"categoria_id"];
-        [dict setValue:[NSString stringWithUTF8String:(const char *)sqlite3_column_text(stmt, 1)] forKey:@"categoria_nombre"];
-        [catData addObject:dict];
-    }
-    
-    sqlite3_finalize(stmt);
+- (void)categorySearchQuery:(NSString *)search {
+    catData = [categories searchCategory:search];
 }
 
 - (void)categoryDeleteRow:(int)idt {
-    const char * select =   "DELETE FROM categorias WHERE id = ?";
-    sqlite3_stmt *stmt;
-    int result = sqlite3_prepare_v2(conn, select, -1, &stmt, NULL);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        return;
-    }
-    
-    result = sqlite3_bind_int(stmt, 1, idt);
-    
-    if (result != SQLITE_OK) {
-        NSLog(@"Error deleting the data: %s", sqlite3_errmsg(conn));
-        sqlite3_finalize(stmt);
-        return;
-    }
-    
-    if (sqlite3_step(stmt) != SQLITE_DONE) {
-        NSLog(@"Error quering the table: %s", sqlite3_errmsg(conn));
-        sqlite3_finalize(stmt);
-        return;
-    }
-    
-    sqlite3_finalize(stmt);
+    [categories removeCategoryWithID:idt];
 }
 
 
