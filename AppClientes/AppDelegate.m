@@ -153,18 +153,19 @@
 }
 
 - (IBAction)addClient:(id)sender {
-    if (!addClient)
+    if (!addClient) {
         addClient = [[AddClient alloc] initWithClient:clients];
-    else
+        
+        if ([[NSBundle mainBundle] loadNibNamed:@"AddClient" owner:addClient topLevelObjects:nil] != YES) {
+            NSLog(@"Error loading");
+        }
+    } else
         [addClient reload];
+    
     // If the window is a active sheet, make it front.
     if (addClient.window.isVisible) {
         [addClient.window makeKeyAndOrderFront:self];
         return;
-    }
-    
-    if ([[NSBundle mainBundle] loadNibNamed:@"AddClient" owner:addClient topLevelObjects:nil] != YES) {
-        NSLog(@"Error loading");
     }
     
     NSWindow *currentWindow = [[NSApplication sharedApplication] keyWindow];
@@ -177,16 +178,17 @@
 }
 
 - (IBAction)addCategory:(id)sender {
-    if (!addCategory)
+    if (!addCategory) {
         addCategory = [[AddCategory alloc] initWithCategory:categories];
+        
+        if ([[NSBundle mainBundle] loadNibNamed:@"AddCategory" owner:addCategory topLevelObjects:nil] != YES) {
+            NSLog(@"Error loading nib");
+        }
+    }
     
     if (addCategory.window.isVisible) {
         [addCategory.window makeKeyAndOrderFront:self];
         return;
-    }
-    
-    if ([[NSBundle mainBundle] loadNibNamed:@"AddCategory" owner:addCategory topLevelObjects:nil] != YES) {
-        NSLog(@"Error loading nib");
     }
     
     NSWindow *currentWindow = [[NSApplication sharedApplication] keyWindow];
@@ -202,16 +204,20 @@
     NSInteger row = self.tableView.selectedRow;
     if (row == -1)
         return;
+    
     int idt = [data[row][@"cliente_id"] intValue];
-    if (!editClient)
+    
+    if (!editClient) {
         editClient = [[EditClient alloc] initWithID:idt andClientClass:clients];
-    else {
+        
+        if ([[NSBundle mainBundle] loadNibNamed:@"EditClient" owner:editClient topLevelObjects:nil] != YES) {
+            NSLog(@"Error loading nib");
+        }
+    } else {
         [editClient changeID:idt];
         [editClient reload];
     }
-    if ([[NSBundle mainBundle] loadNibNamed:@"EditClient" owner:editClient topLevelObjects:nil] != YES) {
-        NSLog(@"Error loading nib");
-    }
+    
     [self.window beginSheet:editClient.window completionHandler:^(NSModalResponse returnCode) {
         if (self.window.isVisible) {
             [self mainQuery];
@@ -226,23 +232,34 @@
 }
 
 - (IBAction)editCategory:(id)sender {
+    // Get the row number and fetch category id.
     NSInteger row = self.catTableView.selectedRow;
+    
     if (row == -1)
         return;
+    
     int idt = [catData[row][@"id"] intValue];
     
-    if (!editCategory)
+    if (!editCategory) {
         editCategory = [[EditCategory alloc] initWithCategory:categories andID:idt];
-    else
+        
+        if ([[NSBundle mainBundle] loadNibNamed:@"EditCategory" owner:editCategory topLevelObjects:nil] != YES) {
+            NSLog(@"Error loading nib");
+        }
+    } else
         [editCategory changeID:idt];
     
-    if ([[NSBundle mainBundle] loadNibNamed:@"EditCategory" owner:editCategory topLevelObjects:nil] != YES) {
-        NSLog(@"Error loading nib");
-    }
+    
     [self.catWindow beginSheet:editCategory.window completionHandler:^(NSModalResponse returnCode) {
+        // Update category table
         if (self.catWindow.isVisible) {
             [self categoryMainQuery];
             [self.catTableView reloadData];
+        }
+        // Update clients table if is visible
+        if (self.window.isVisible) {
+            [self mainQuery];
+            [self.tableView reloadData];
         }
     }];
     editCategory.nombre.stringValue = catData[row][@"nombre"];
@@ -305,7 +322,15 @@
 }
 
 - (void)categoryDeleteRow:(int)idt {
-    [categories removeCategoryWithID:idt];
+    BOOL result = [categories removeCategoryWithID:idt];
+    
+    if (!result) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"No se puede eliminar la categoría"];
+        [alert setInformativeText:@"Se encuentra en uso"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert runModal];
+    }
 }
 
 

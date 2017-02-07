@@ -37,7 +37,6 @@
     [self loadCategories];
     self->idt = idClient;
     self->clients = cl;
-    NSLog(@"%d", idt);
     return self;
 }
 
