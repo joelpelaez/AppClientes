@@ -323,7 +323,7 @@
     if (search.length == 0)
         [self mainQuery];
     else {
-        NSString *n = [search stringByAppendingString:@"%"];
+        NSString *n = [@"%" stringByAppendingString:[search stringByAppendingString:@"%"]];
         data = [clients searchClients:n];
     }
 }
@@ -356,7 +356,7 @@
     if (search.length == 0)
         [self categoryMainQuery];
     else {
-        NSString *n = [search stringByAppendingString:@"%"];
+        NSString *n = [@"%" stringByAppendingString:[search stringByAppendingString:@"%"]];
         catData = [categories searchCategory:n];
     }
 }

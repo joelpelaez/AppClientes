@@ -84,6 +84,38 @@
     
     NSInteger pos = self.categoria.indexOfSelectedItem;
     
+    // Nombre and Apellidos must exist.
+    if (self.nombre.stringValue.length == 0) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Nombre inválido"];
+        [alert setInformativeText:@"Debe ingresar un nombre"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert runModal];
+        return;
+    }
+    
+    if (self.apellidos.stringValue.length == 0) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Apellido inválido"];
+        [alert setInformativeText:@"Debe ingresar al menos un apellido"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert runModal];
+        return;
+    }
+    
+    
+    if (self.telefono.stringValue.length > 20) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Número inválido"];
+        [alert setInformativeText:@"Es demasiado grande"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert runModal];
+        return;
+    }
+    
     // First check valid data
     if (![self.correo.stringValue isValidEmail]) {
         NSAlert *alert = [[NSAlert alloc] init];

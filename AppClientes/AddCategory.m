@@ -46,6 +46,17 @@
 
 - (IBAction)addCategory:(id)sender {
     
+    // Nombre must exist.
+    if (self.nombre.stringValue.length == 0) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Nombre inválido"];
+        [alert setInformativeText:@"Debe ingresar un nombre"];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert runModal];
+        return;
+    }
+    
     BOOL result = [category insertCategoryWithName:self.nombre.stringValue];
     
     if (!result) {
