@@ -23,47 +23,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="217" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLI-kn-xyY">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLI-kn-xyY">
                         <rect key="frame" x="18" y="80" width="118" height="19"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Nueva Categoría" id="NyJ-ny-XEe">
                             <font key="font" metaFont="system" size="15"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TA3-Tl-Kh1">
+                    <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TA3-Tl-Kh1">
                         <rect key="frame" x="77" y="49" width="120" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="1qh-dF-OvE">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FjN-cG-Md2">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FjN-cG-Md2">
                         <rect key="frame" x="18" y="52" width="53" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Nombre" id="7Ix-Cd-tsi">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G8b-MW-R9I">
-                        <rect key="frame" x="8" y="13" width="94" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Cancelar" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pvC-VU-TA1">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="cancel:" target="-2" id="O4s-dQ-FjV"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ce7-yr-Sm7">
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ce7-yr-Sm7">
                         <rect key="frame" x="123" y="13" width="80" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Añadir" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qzt-Co-5Rw">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -72,7 +57,30 @@
                             <action selector="addCategory:" target="-2" id="UbB-FL-LNo"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G8b-MW-R9I">
+                        <rect key="frame" x="14" y="13" width="94" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cancelar" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pvC-VU-TA1">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancel:" target="-2" id="O4s-dQ-FjV"/>
+                        </connections>
+                    </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="MLI-kn-xyY" firstAttribute="leading" secondItem="FjN-cG-Md2" secondAttribute="leading" id="1EE-jZ-4Gm"/>
+                    <constraint firstItem="FjN-cG-Md2" firstAttribute="baseline" secondItem="TA3-Tl-Kh1" secondAttribute="baseline" id="8uD-AP-nAo"/>
+                    <constraint firstAttribute="trailing" secondItem="TA3-Tl-Kh1" secondAttribute="trailing" constant="20" symbolic="YES" id="BXU-aM-t2m"/>
+                    <constraint firstAttribute="bottom" secondItem="G8b-MW-R9I" secondAttribute="bottom" constant="20" symbolic="YES" id="C6V-k4-0jj"/>
+                    <constraint firstItem="MLI-kn-xyY" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="KPH-YN-K5C"/>
+                    <constraint firstItem="TA3-Tl-Kh1" firstAttribute="trailing" secondItem="Ce7-yr-Sm7" secondAttribute="trailing" id="LlA-pn-ICt"/>
+                    <constraint firstItem="G8b-MW-R9I" firstAttribute="baseline" secondItem="Ce7-yr-Sm7" secondAttribute="baseline" id="apP-Mr-CAD"/>
+                    <constraint firstItem="G8b-MW-R9I" firstAttribute="top" secondItem="TA3-Tl-Kh1" secondAttribute="bottom" constant="8" symbolic="YES" id="lVS-n7-scR"/>
+                    <constraint firstItem="MLI-kn-xyY" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="rzw-ee-WPM"/>
+                    <constraint firstItem="TA3-Tl-Kh1" firstAttribute="leading" secondItem="FjN-cG-Md2" secondAttribute="trailing" constant="8" symbolic="YES" id="xDC-RC-QNz"/>
+                    <constraint firstItem="FjN-cG-Md2" firstAttribute="leading" secondItem="G8b-MW-R9I" secondAttribute="leading" id="zfu-2b-pbw"/>
+                </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>

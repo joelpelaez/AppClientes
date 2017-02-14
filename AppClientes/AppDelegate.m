@@ -273,19 +273,19 @@
 
 - (void)createDatabase {
     const char * tablas =   "PRAGMA foreign_keys=ON;"
-                            "CREATE TABLE IF NOT EXISTS categorias ("
-                            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                            "nombre VARCHAR(40) NOT NULL UNIQUE);"
-                            "CREATE TABLE IF NOT EXISTS clientes ("
-                            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                            "nombre VARCHAR(40) NOT NULL, "
-                            "apellidos VARCHAR(40) NOT NULL, "
-                            "telefono VARCHAR(12) NOT NULL, "
-                            "correo_electronico VARCHAR(30) NOT NULL UNIQUE, "
-                            "categoria_id INTEGER NOT NULL, "
-                            "FOREIGN KEY (categoria_id) REFERENCES categorias (id) ON DELETE NO ACTION ON UPDATE NO ACTION);"
-                            "INSERT INTO categorias (id, nombre) SELECT 1, 'General' WHERE NOT EXISTS "
-                            "(SELECT 1 FROM categorias WHERE id = 1)";
+    "CREATE TABLE IF NOT EXISTS categorias ("
+    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+    "nombre VARCHAR(40) NOT NULL UNIQUE);"
+    "CREATE TABLE IF NOT EXISTS clientes ("
+    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+    "nombre VARCHAR(40) NOT NULL, "
+    "apellidos VARCHAR(40) NOT NULL, "
+    "telefono VARCHAR(12) NOT NULL, "
+    "correo_electronico VARCHAR(30) NOT NULL UNIQUE, "
+    "categoria_id INTEGER NOT NULL, "
+    "FOREIGN KEY (categoria_id) REFERENCES categorias (id) ON DELETE NO ACTION ON UPDATE NO ACTION);"
+    "INSERT INTO categorias (id, nombre) SELECT 1, 'General' WHERE NOT EXISTS "
+    "(SELECT 1 FROM categorias WHERE id = 1)";
     char *err;
     
     int result = sqlite3_exec(conn, tablas, NULL, NULL, &err);
@@ -303,7 +303,12 @@
 }
 
 - (void)searchQuery:(NSString *)search {
-    data = [clients searchClients:search];
+    if (search.length == 0)
+        [self mainQuery];
+    else {
+        NSString *n = [search stringByAppendingString:@"%"];
+        data = [clients searchClients:n];
+    }
 }
 
 - (void)deleteRow:(int)idt {
@@ -318,7 +323,12 @@
 }
 
 - (void)categorySearchQuery:(NSString *)search {
-    catData = [categories searchCategory:search];
+    if (search.length == 0)
+        [self categoryMainQuery];
+    else {
+        NSString *n = [search stringByAppendingString:@"%"];
+        catData = [categories searchCategory:n];
+    }
 }
 
 - (void)categoryDeleteRow:(int)idt {

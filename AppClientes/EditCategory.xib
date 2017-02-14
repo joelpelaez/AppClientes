@@ -23,36 +23,42 @@
                 <rect key="frame" x="0.0" y="0.0" width="217" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peU-TS-YgM">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peU-TS-YgM">
                         <rect key="frame" x="18" y="80" width="115" height="19"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Editar Categoría" id="jXZ-ZT-0sm">
                             <font key="font" metaFont="system" size="15"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Oj-pM-pIV">
+                    <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Oj-pM-pIV">
                         <rect key="frame" x="77" y="49" width="120" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="edg-04-lSp">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c23-gt-8qM">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c23-gt-8qM">
                         <rect key="frame" x="18" y="52" width="53" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Nombre" id="Cba-8L-qqD">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MFD-fQ-zTK">
-                        <rect key="frame" x="8" y="13" width="94" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XkG-KB-GkF">
+                        <rect key="frame" x="114" y="13" width="89" height="32"/>
+                        <buttonCell key="cell" type="push" title="Guardar" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gc2-QG-GLY">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="editCategory:" target="-2" id="ZPl-vZ-X5g"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MFD-fQ-zTK">
+                        <rect key="frame" x="14" y="13" width="94" height="32"/>
                         <buttonCell key="cell" type="push" title="Cancelar" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2DY-VD-LEe">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -61,18 +67,20 @@
                             <action selector="cancel:" target="-2" id="dzt-0e-x9F"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XkG-KB-GkF">
-                        <rect key="frame" x="125" y="13" width="76" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Editar" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gc2-QG-GLY">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="editCategory:" target="-2" id="ZPl-vZ-X5g"/>
-                        </connections>
-                    </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="peU-TS-YgM" firstAttribute="top" secondItem="6A2-4a-Le9" secondAttribute="top" constant="20" symbolic="YES" id="5AI-Cu-kgZ"/>
+                    <constraint firstAttribute="trailing" secondItem="4Oj-pM-pIV" secondAttribute="trailing" constant="20" symbolic="YES" id="6vX-f3-H3Z"/>
+                    <constraint firstItem="c23-gt-8qM" firstAttribute="leading" secondItem="MFD-fQ-zTK" secondAttribute="leading" id="CX2-Qk-zO1"/>
+                    <constraint firstItem="MFD-fQ-zTK" firstAttribute="baseline" secondItem="XkG-KB-GkF" secondAttribute="baseline" id="SB7-d0-t05"/>
+                    <constraint firstItem="MFD-fQ-zTK" firstAttribute="top" secondItem="4Oj-pM-pIV" secondAttribute="bottom" constant="8" symbolic="YES" id="am7-tM-2M4"/>
+                    <constraint firstItem="4Oj-pM-pIV" firstAttribute="trailing" secondItem="XkG-KB-GkF" secondAttribute="trailing" id="ede-zJ-xc5"/>
+                    <constraint firstItem="peU-TS-YgM" firstAttribute="leading" secondItem="c23-gt-8qM" secondAttribute="leading" id="qG2-1i-0RG"/>
+                    <constraint firstItem="4Oj-pM-pIV" firstAttribute="leading" secondItem="c23-gt-8qM" secondAttribute="trailing" constant="8" symbolic="YES" id="qNa-br-nlI"/>
+                    <constraint firstItem="peU-TS-YgM" firstAttribute="leading" secondItem="6A2-4a-Le9" secondAttribute="leading" constant="20" symbolic="YES" id="uKR-Tv-qSx"/>
+                    <constraint firstAttribute="bottom" secondItem="MFD-fQ-zTK" secondAttribute="bottom" constant="20" symbolic="YES" id="w3a-wX-Uag"/>
+                    <constraint firstItem="c23-gt-8qM" firstAttribute="baseline" secondItem="4Oj-pM-pIV" secondAttribute="baseline" id="wXA-gF-qHt"/>
+                </constraints>
             </view>
             <point key="canvasLocation" x="7.5" y="86.5"/>
         </window>
