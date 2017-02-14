@@ -136,6 +136,7 @@
 }
 
 - (IBAction)deleteCategory:(id)sender {
+    // Get current element.
     NSInteger row = self.catTableView.selectedRow;
     if (row == -1)
         return;
@@ -153,6 +154,7 @@
 }
 
 - (IBAction)addClient:(id)sender {
+    // Load the window
     if (!addClient) {
         addClient = [[AddClient alloc] initWithClient:clients];
         
@@ -178,6 +180,7 @@
 }
 
 - (IBAction)addCategory:(id)sender {
+    // Load the controller and window
     if (!addCategory) {
         addCategory = [[AddCategory alloc] initWithCategory:categories];
         
@@ -201,12 +204,14 @@
 }
 
 - (IBAction)editClient:(id)sender {
+    // Get first selected item.
     NSInteger row = self.tableView.selectedRow;
     if (row == -1)
         return;
     
     int idt = [data[row][@"cliente_id"] intValue];
     
+    // Create a new Controller if it's needed.
     if (!editClient) {
         editClient = [[EditClient alloc] initWithID:idt andClientClass:clients];
         
@@ -240,6 +245,7 @@
     
     int idt = [catData[row][@"id"] intValue];
     
+    // create a new controller if not it's loaded.
     if (!editCategory) {
         editCategory = [[EditCategory alloc] initWithCategory:categories andID:idt];
         
@@ -271,6 +277,9 @@
     return conn;
 }
 
+/**
+ Prepare a new database if it's necessary.
+ */
 - (void)createDatabase {
     const char * tablas =   "PRAGMA foreign_keys=ON;"
     "CREATE TABLE IF NOT EXISTS categorias ("
@@ -298,10 +307,18 @@
 
 #pragma mark Manejo de clientes
 
+/**
+ Get all clients.
+ */
 - (void)mainQuery {
     data = [clients fetchAllClients];
 }
 
+/**
+ Get all clients that match the lastname with search
+
+ @param search string contains a lastname
+ */
 - (void)searchQuery:(NSString *)search {
     if (search.length == 0)
         [self mainQuery];
@@ -311,6 +328,11 @@
     }
 }
 
+/**
+ Delete a client using its identifer.
+
+ @param idt a identifier.
+ */
 - (void)deleteRow:(int)idt {
     [clients removeClientWithID:idt];
 }
@@ -318,10 +340,18 @@
 
 #pragma mark Manejo de categorias
 
+/**
+ Get all categories
+ */
 - (void)categoryMainQuery {
     catData = [categories fetchAllCategories];
 }
 
+/**
+ Get the categories that match with search.
+ 
+ @param search string to compare.
+ */
 - (void)categorySearchQuery:(NSString *)search {
     if (search.length == 0)
         [self categoryMainQuery];
@@ -331,6 +361,11 @@
     }
 }
 
+/**
+ Delete a category based in its identifier.
+
+ @param idt the identifier
+ */
 - (void)categoryDeleteRow:(int)idt {
     BOOL result = [categories removeCategoryWithID:idt];
     
